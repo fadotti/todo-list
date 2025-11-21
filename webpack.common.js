@@ -20,7 +20,10 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "style-loader", "css-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          { loader: "css-loader", options: { sourceMap: true } },
+        ],
       },
       {
         test: /\.html$/i,
