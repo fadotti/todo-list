@@ -1,3 +1,117 @@
 body {
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Noto Sans", sans-serif;
+}
+
+/* Homepage */
+
+div#home-container {
+  height: 80vh;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 150px 600px;
+}
+
+div#home-container > div:first-child {
+  display: flex;
+  flex-direction: column;
+}
+
+div#home-container > div:nth-child(2) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 50px;
+  gap: 1rem;
+}
+
+div#home-container > div:nth-child(2) > div.project-card {
+  height: 200px;
+}
+
+div#project-banner {
+  grid-column-start: span 2;
+  font-size: 2rem;
+  font-style: italic;
+}
+
+div#nav {
+  padding-top: calc(50px + 1rem);
+}
+
+div#nav > button {
+  display: flex;
+  align-items: center;
+  font-family: "Noto Sans", sans-serif;
+  font-weight: 800;
+  outline: none;
+  border: none;
+  background-color: white;
+  border-radius: 10px;
+}
+
+div#nav > button:hover {
+  background-color: #ebebeb;
+  cursor: pointer;
+}
+
+div#nav > button > svg {
+  height: 2rem;
+}
+
+div.project-card {
+  display: grid;
+  grid-template-rows: 1fr 4fr 1fr;
+  border: solid 1px #c2c2c2;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+div.project-card:hover {
+  box-shadow: 0px 2px 15px 0px #E8E87A;
+}
+
+div.project-card > div {
+  display: flex;
+}
+
+div.project-card > div:first-child {
+  padding: 0 10px;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+div.project-card > div:nth-child(2) {
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  font-style: italic;
+}
+
+div.project-card > div:nth-child(3) {
+  justify-content: flex-end;
+  padding-right: 10px;
+  gap: 5px;
+}
+
+div.project-card > div:nth-child(3) button {
+  outline: none;
+  border: none;
+  background-color: white;
+  padding: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+div.project-card > div:nth-child(3) button:hover {
+  background-color: #ebebeb;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+div.project-card > div:nth-child(3) svg {
+  height: 1.7rem;
+  width: 1.7rem;
 }

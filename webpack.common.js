@@ -16,25 +16,6 @@ module.exports = {
     }),
     new MiniCssExtractPlugin(),
   ],
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          { loader: "css-loader", options: { sourceMap: true } },
-        ],
-      },
-      {
-        test: /\.html$/i,
-        loader: "html-loader",
-      },
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: "asset/resource",
-      },
-    ],
-  },
   optimization: {
     minimizer: [
       `...`,
