@@ -8,19 +8,22 @@ body {
 
 /* Homepage */
 
-div#home-container {
+div#home-container,
+div#project-container {
   height: 80vh;
   display: grid;
   gap: 1rem;
   grid-template-columns: 150px 600px;
 }
 
-div#home-container > div:first-child {
+div#home-container > div:first-child,
+div#project-container > div:first-child {
   display: flex;
   flex-direction: column;
 }
 
-div#home-container > div:nth-child(2) {
+div#home-container > div:nth-child(2),
+div#project-container > div:nth-child(2) {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 50px;
@@ -28,7 +31,8 @@ div#home-container > div:nth-child(2) {
   gap: 1rem;
 }
 
-div#home-container > div:nth-child(2) > div.project-card {
+div#home-container > div:nth-child(2) > div.project-card,
+div#project-container > div:nth-child(2) > div.task-card {
   height: 200px;
 }
 
@@ -62,7 +66,8 @@ div#nav > button > svg {
   height: 2rem;
 }
 
-div.project-card {
+div.project-card,
+div.task-card {
   display: grid;
   grid-template-rows: 1fr 4fr 1fr;
   border: solid 1px #c2c2c2;
@@ -70,38 +75,96 @@ div.project-card {
   padding: 5px;
 }
 
-div.project-card:hover {
+div.task-card {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div.project-card:hover,
+div.task-card:hover {
   box-shadow: 0px 2px 15px 0px #E8E87A;
 }
 
-div.project-card:last-child {
+div.project-card:last-child,
+div.task-card:last-child {
   margin-bottom: 10px;
 }
 
-div.project-card > div {
+div.project-card > div,
+div.task-card > div {
   display: flex;
 }
 
-div.project-card > div:first-child {
+div.project-card > div:first-child,
+div.task-card > div:first-child {
   padding: 0 10px;
   font-size: 1.3rem;
   font-weight: 500;
 }
 
-div.project-card > div:nth-child(2) {
+div.project-card > div:nth-child(2),
+div.task-card > div:nth-child(2) {
   flex-direction: column;
   justify-content: center;
   gap: 0.5rem;
   font-style: italic;
+  width: 100%;
+}
+
+div.task-card > div:nth-child(2) > div:first-child {
+  height: 4rem;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 div.project-card > div:nth-child(3) {
+  align-items: center;
   justify-content: flex-end;
   padding-right: 10px;
   gap: 5px;
 }
 
-div.project-card > div:nth-child(3) button {
+div.task-card > div:nth-child(3) {
+  align-items: center;
+  justify-content: space-between;
+}
+
+div.task-card > div:nth-child(3) > div:first-child {
+  padding: 2px;
+  border-radius: 5px;
+  font-weight: 600;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+div.task-card > div:nth-child(3) > div.low-priority:first-child {
+  background-color: #8fabff;
+  color: blue;
+}
+
+div.task-card > div:nth-child(3) > div.medium-priority:first-child {
+  background-color: orange;
+  color: #8a5f00;
+}
+
+div.task-card > div:nth-child(3) > div.high-priority:first-child {
+  background-color: red;
+  color: #9e0000;
+}
+
+div.task-card > div:nth-child(3) > div:last-child {
+  display: flex;
+  padding-right: 10px;
+  gap: 5px;
+}
+
+div.project-card > div:nth-child(3) button,
+div.task-card > div:nth-child(3) button {
   outline: none;
   border: none;
   background-color: white;
@@ -110,13 +173,15 @@ div.project-card > div:nth-child(3) button {
   height: 2.5rem;
 }
 
-div.project-card > div:nth-child(3) button:hover {
+div.project-card > div:nth-child(3) button:hover,
+div.task-card > div:nth-child(3) button:hover {
   background-color: #ebebeb;
   cursor: pointer;
   border-radius: 50%;
 }
 
-div.project-card > div:nth-child(3) svg {
+div.project-card > div:nth-child(3) svg,
+div.task-card > div:nth-child(3) svg {
   height: 1.7rem;
   width: 1.7rem;
 }
