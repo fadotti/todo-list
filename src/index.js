@@ -2,4 +2,8 @@ import "./style.css";
 
 import { firstProject } from "./projects";
 
-console.log(firstProject);
+localStorage.setItem("firstProject", JSON.stringify(firstProject));
+
+const a = localStorage.getItem("firstProject");
+
+console.log(a);
