@@ -31,9 +31,24 @@ div#project-container > div:nth-child(2) {
   gap: 1rem;
 }
 
-div#home-container > div:nth-child(2) > div.project-card,
-div#project-container > div:nth-child(2) > div.task-card {
+div#home-container > div:nth-child(2) > div.project-card {
   height: 200px;
+}
+
+div#project-container > div:nth-child(2) > div.task-card {
+  height: 250px;
+}
+
+dialog#task-dialog {
+  padding: 0;
+  border: none;
+  position: absolute;
+  top: 0vh;
+}
+
+div.task-card.dialog-card {
+  width: 400px;
+  min-height: 400px;
 }
 
 div#project-banner {
@@ -75,6 +90,10 @@ div.task-card {
   padding: 5px;
 }
 
+div.task-card.dialog-card {
+  grid-template-rows: 30px auto 40px;
+}
+
 div.task-card {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -82,7 +101,15 @@ div.task-card {
 
 div.project-card:hover,
 div.task-card:hover {
-  box-shadow: 0px 2px 15px 0px #E8E87A;
+  box-shadow: 0px 2px 15px 0px #5e5e5e;
+}
+
+div.task-card.completed {
+  border: solid 1px green;
+}
+
+div.task-card.completed:hover {
+  box-shadow: 0px 2px 15px 10px #bcffa6;
 }
 
 div.project-card:last-child,
@@ -90,14 +117,22 @@ div.task-card:last-child {
   margin-bottom: 10px;
 }
 
+div.task-card.dialog-card:last-child {
+  margin: 0;
+}
+
 div.project-card > div,
 div.task-card > div {
   display: flex;
 }
 
+div.task-card.dialog-card > div:first-child {
+  justify-content: space-between;
+}
+
 div.project-card > div:first-child,
 div.task-card > div:first-child {
-  padding: 0 10px;
+  padding: 0 0 0 10px;
   font-size: 1.3rem;
   font-weight: 500;
 }
@@ -106,6 +141,14 @@ div.project-card > div:nth-child(2),
 div.task-card > div:nth-child(2) {
   flex-direction: column;
   justify-content: center;
+  gap: 0.5rem;
+  font-style: italic;
+  width: 100%;
+}
+
+div.task-card.dialog-card > div:nth-child(2) {
+  flex-direction: column;
+  justify-content: space-between;
   gap: 0.5rem;
   font-style: italic;
   width: 100%;
@@ -121,6 +164,12 @@ div.task-card > div:nth-child(2) > div:first-child {
   -webkit-box-orient: vertical;
 }
 
+div.task-card.dialog-card > div:nth-child(2) > div:first-child {
+  display: block;
+  overflow: visible;
+  height: fit-content;
+}
+
 div.project-card > div:nth-child(3) {
   align-items: center;
   justify-content: flex-end;
@@ -133,13 +182,22 @@ div.task-card > div:nth-child(3) {
   justify-content: space-between;
 }
 
+div.task-card.dialog-card > div:nth-child(3) {
+  align-items: center;
+  justify-content: space-between;
+}
+
 div.task-card > div:nth-child(3) > div:first-child {
   padding: 2px;
   border-radius: 5px;
   font-weight: 600;
-  width: 100%;
+  width: 135px;
   display: flex;
   justify-content: center;
+}
+
+div.task-card.dialog-card > div:nth-child(3) > div:first-child {
+  width: 140px;
 }
 
 div.task-card > div:nth-child(3) > div.low-priority:first-child {
@@ -159,8 +217,8 @@ div.task-card > div:nth-child(3) > div.high-priority:first-child {
 
 div.task-card > div:nth-child(3) > div:last-child {
   display: flex;
-  padding-right: 10px;
-  gap: 5px;
+  /* padding-right: 10px; */
+  /* gap: 5px; */
 }
 
 div.project-card > div:nth-child(3) button,
@@ -239,4 +297,18 @@ form > div:nth-child(3) > button {
 form > div:nth-child(3) > button:hover {
   background-color: #ebebeb;
   cursor: pointer;
+}
+
+div.edit-task-dialog-row:nth-child(2) {
+  display: grid;
+  grid-template-columns: 100px 400px;
+  gap: 10px;
+}
+
+svg.completed {
+  fill: green;
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(3px);
 }

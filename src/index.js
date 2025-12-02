@@ -1,3 +1,5 @@
 import "./style.css";
 
-console.log("It's working");
+import { firstProject } from "./projects";
+
+console.log(firstProject);
