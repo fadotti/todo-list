@@ -77,7 +77,7 @@ div#nav > button:hover {
   cursor: pointer;
 }
 
-div#nav > button > svg {
+div#nav > button > img {
   height: 2rem;
 }
 
@@ -238,8 +238,8 @@ div.task-card > div:nth-child(3) button:hover {
   border-radius: 50%;
 }
 
-div.project-card > div:nth-child(3) svg,
-div.task-card > div:nth-child(3) svg {
+div.project-card > div:nth-child(3) img,
+div.task-card > div:nth-child(3) img {
   height: 1.7rem;
   width: 1.7rem;
 }
@@ -271,7 +271,7 @@ dialog button.close-dialog:hover {
   border-radius: 50%;
 }
 
-dialog button.close-dialog > svg {
+dialog button.close-dialog > img {
   width: 1.7rem;
 }
 
@@ -305,7 +305,7 @@ div.edit-task-dialog-row:nth-child(2) {
   gap: 10px;
 }
 
-svg.completed {
+img.completed {
   fill: green;
 }
 
