@@ -79,7 +79,4 @@ firstProject.addTask(secondTask);
 firstProject.addTask(thirdTask);
 firstProject.addTask(fourthTask);
 
-console.log(firstProject)
-
-
 export {Task, Project, firstProject}
