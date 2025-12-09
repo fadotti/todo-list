@@ -45,30 +45,30 @@ function renderHome() {
     document.querySelector("#home-container > div:nth-child(2)").appendChild(div.cloneNode(true));
 
     div.removeAttribute('class');
-    document.querySelector("div.project-card").append(div.cloneNode(true), div.cloneNode(true), div.cloneNode(true));
+    document.querySelector("div.project-card:last-child").append(div.cloneNode(true), div.cloneNode(true), div.cloneNode(true));
 
     span.textContent = projectObject.title;
-    document.querySelector("div.project-card > div:first-child").append(span.cloneNode(true));
+    document.querySelector("div.project-card:last-child > div:first-child").append(span.cloneNode(true));
 
     div.textContent = `Created: ${projectObject.created}`;
-    document.querySelector("div.project-card > div:nth-child(2)").append(div.cloneNode(true));
+    document.querySelector("div.project-card:last-child > div:nth-child(2)").append(div.cloneNode(true));
 
     div.textContent = `Last Edited: ${projectObject.created}`;
-    document.querySelector("div.project-card > div:nth-child(2)").append(div.cloneNode(true));
+    document.querySelector("div.project-card:last-child > div:nth-child(2)").append(div.cloneNode(true));
 
     div.textContent = `Number of Tasks: ${projectObject.numberOfTasks}`;
-    document.querySelector("div.project-card > div:nth-child(2)").append(div.cloneNode(true));
+    document.querySelector("div.project-card:last-child > div:nth-child(2)").append(div.cloneNode(true));
 
-    document.querySelector("div.project-card > div:nth-child(3)").append(button.cloneNode(true), button.cloneNode(true), button.cloneNode(true));
+    document.querySelector("div.project-card:last-child > div:nth-child(3)").append(button.cloneNode(true), button.cloneNode(true), button.cloneNode(true));
 
     image.src = openFolder;
-    document.querySelector("div.project-card > div:nth-child(3) > button:first-child").append(image.cloneNode(true));
+    document.querySelector("div.project-card:last-child > div:nth-child(3) > button:first-child").append(image.cloneNode(true));
 
     image.src = pencil;
-    document.querySelector("div.project-card > div:nth-child(3) > button:nth-child(2)").append(image.cloneNode(true));
+    document.querySelector("div.project-card:last-child > div:nth-child(3) > button:nth-child(2)").append(image.cloneNode(true));
 
     image.src = trashCan;
-    document.querySelector("div.project-card > div:nth-child(3) > button:nth-child(3)").append(image.cloneNode(true));
+    document.querySelector("div.project-card:last-child > div:nth-child(3) > button:nth-child(3)").append(image.cloneNode(true));
   })
 
   const dialog = document.createElement("dialog");

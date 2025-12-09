@@ -1,8 +1,7 @@
 import "./style.css";
-
 import { Task, firstProject } from "./projects";
-
 import { renderHome } from "./homeDOM";
+import { renderTasks } from "./taskDOM";
 
 if(Object.keys(localStorage) < 1) {
   localStorage.setItem("firstProject", JSON.stringify(firstProject));
@@ -36,3 +35,6 @@ if(Object.keys(localStorage) < 1) {
 }
 
 renderHome();
+
+window.renderTasks = renderTasks;
+window.renderHome = renderHome;
