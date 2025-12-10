@@ -19,6 +19,7 @@ function renderTasks(projectIndex, taskIndex) {
   document.querySelector("#project-container").appendChild(div.cloneNode(true));
 
   const button = document.createElement("button");
+  button.setAttribute("type", "button");
   document.querySelector("#nav").appendChild(button.cloneNode(true));
 
   const image = document.createElement("img");
@@ -254,6 +255,33 @@ function renderTasks(projectIndex, taskIndex) {
   document.querySelector("#add-task-dialog > form > div.add-task-dialog-row.form-content")
     .append(label.cloneNode(true), textarea.cloneNode(true));
 
+  label.setAttribute("for", "due-date");
+  label.textContent = "Due Date* ";
+  input.setAttribute("type", "date");
+  input.setAttribute("id", "due-date");
+  input.setAttribute("required", "");
+  document.querySelector("#add-task-dialog > form > div.add-task-dialog-row.form-content")
+    .append(label.cloneNode(true), input.cloneNode(true));
+
+  label.setAttribute("for", "priority-select");
+  label.textContent = "Priority* ";
+  const select = document.createElement("select");
+  select.setAttribute("name", "priority");
+  select.setAttribute("id", "priority-select");
+  const option = document.createElement("option");
+  option.setAttribute("value", "low");
+  option.textContent = "Low";
+  select.appendChild(option.cloneNode(true));
+  option.setAttribute("value", "medium");
+  option.textContent = "Medium";
+  select.appendChild(option.cloneNode(true));
+  option.setAttribute("value", "high");
+  option.textContent = "High";
+  select.appendChild(option.cloneNode(true));
+
+  document.querySelector("#add-task-dialog > form > div.add-task-dialog-row.form-content")
+    .append(label.cloneNode(true), select.cloneNode(true));
+
   div.setAttribute("class", "add-task-dialog-row");
   button.removeAttribute("class");
   button.textContent = "Add Task";
@@ -307,6 +335,25 @@ function renderTasks(projectIndex, taskIndex) {
 
   document.querySelector("#edit-task-dialog > form > div.edit-task-dialog-row.form-content")
     .append(label.cloneNode(true), textarea.cloneNode(true));
+
+  label.setAttribute("for", "due-date-2");
+  label.textContent = "Due Date* ";
+  input.setAttribute("type", "date");
+  input.setAttribute("id", "due-date-2");
+  input.setAttribute("required", "");
+  document.querySelector("#edit-task-dialog > form > div.edit-task-dialog-row.form-content")
+    .append(label.cloneNode(true), input.cloneNode(true));
+
+  label.setAttribute("for", "priority-select-2");
+  label.textContent = "Priority* ";
+  select.setAttribute("name", "priority-2");
+  select.setAttribute("id", "priority-select-2");
+
+  document.querySelector("#edit-task-dialog > form > div.edit-task-dialog-row.form-content")
+    .append(label.cloneNode(true), select.cloneNode(true));
+
+  label.setAttribute("for", "priority-select");
+  label.textContent = "Priority* ";
 
   div.setAttribute("class", "edit-task-dialog-row");
   button.removeAttribute("class");

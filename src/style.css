@@ -313,3 +313,10 @@ div.add-task-dialog-row:nth-child(2) {
 dialog::backdrop {
   backdrop-filter: blur(3px);
 }
+
+input#due-date,
+input#due-date-2,
+select#priority-select,
+select#priority-select-2 {
+  width: 110px;
+}

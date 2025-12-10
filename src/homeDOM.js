@@ -17,6 +17,7 @@ function renderHome() {
   document.querySelector("#home-container").appendChild(div.cloneNode(true));
 
   const button = document.createElement("button");
+  button.setAttribute("type", "button");
   document.querySelector("#nav").appendChild(button.cloneNode(true));
 
   const image = document.createElement("img");
@@ -32,7 +33,7 @@ function renderHome() {
   div.textContent = "My Projects";
   document.querySelector("#home-container > div:nth-child(2)").appendChild(div.cloneNode(true));
 
-  Object.keys(localStorage).forEach(key => {
+  Object.keys(localStorage).sort().forEach(key => {
     const projectObject = JSON.parse(localStorage.getItem(key));
     Object.defineProperty(projectObject, 'numberOfTasks', {
       get: function() {
@@ -111,10 +112,12 @@ function renderHome() {
 
   div.setAttribute("class", "add-project-dialog-row");
   button.removeAttribute("class");
+  button.setAttribute("type", "submit");
   button.textContent = "Add Project";
   
   document.querySelector("#add-project-dialog > form").append(div.cloneNode(true));
-  document.querySelector("#add-project-dialog > form >div.add-project-dialog-row:nth-child(3)").append(button.cloneNode(true));
+  document.querySelector("#add-project-dialog > form > div.add-project-dialog-row:nth-child(3)").append(button.cloneNode(true));
+  button.removeAttribute("type");
 
 
 
@@ -157,7 +160,7 @@ function renderHome() {
   button.textContent = "Apply Changes";
   
   document.querySelector("#edit-project-dialog > form").append(div.cloneNode(true));
-  document.querySelector("#edit-project-dialog > form >div.edit-project-dialog-row:nth-child(3)").append(button.cloneNode(true));
+  document.querySelector("#edit-project-dialog > form > div.edit-project-dialog-row:nth-child(3)").append(button.cloneNode(true));
 
 
 
@@ -191,7 +194,7 @@ function renderHome() {
   button.textContent = "Delete Project";
   
   document.querySelector("#delete-project-dialog > form").append(div.cloneNode(true));
-  document.querySelector("#delete-project-dialog > form >div.delete-project-dialog-row:nth-child(3)").append(button.cloneNode(true));
+  document.querySelector("#delete-project-dialog > form > div.delete-project-dialog-row:nth-child(3)").append(button.cloneNode(true));
 }
 
 export {renderHome}

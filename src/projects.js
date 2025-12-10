@@ -27,7 +27,7 @@ class Project {
     }
   }
 
-const firstProject = new Project(
+const project1 = new Project(
   'My First Project',
   Date().substring(4, 21),
   Date().substring(4, 21),
@@ -74,9 +74,9 @@ const fourthTask = new Task(
   true
 )
 
-firstProject.addTask(firstTask);
-firstProject.addTask(secondTask);
-firstProject.addTask(thirdTask);
-firstProject.addTask(fourthTask);
+project1.addTask(firstTask);
+project1.addTask(secondTask);
+project1.addTask(thirdTask);
+project1.addTask(fourthTask);
 
-export {Task, Project, firstProject}
+export {Task, Project, project1}
