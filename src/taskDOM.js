@@ -6,7 +6,7 @@ import home from "./assets/home.svg";
 import check from "./assets/check.svg";
 import checkGreen from "./assets/checkGreen.svg";
 
-function renderTasks(projectIndex, taskIndex) {
+function renderTasks(projectIndex) {
   const body = document.querySelector("body");
   body.replaceChildren([]);
 
@@ -124,16 +124,16 @@ function renderTasks(projectIndex, taskIndex) {
   body.appendChild(dialog.cloneNode(true));
 
   div.className = "task-card dialog-card";
-  if(project.taskList[taskIndex].isDone === true) {
-    div.className += " completed";
-  }
+  // if(project.taskList[taskIndex].isDone === true) {
+  //   div.className += " completed";
+  // }
   div.textContent = "";
   document.querySelector("dialog#task-dialog").appendChild(div.cloneNode(true));
 
   div.removeAttribute('class');
   document.querySelector(".task-card.dialog-card").appendChild(div.cloneNode(true));
 
-  span.textContent = project.taskList[taskIndex].title;
+  span.textContent = "";
   document.querySelector(".task-card.dialog-card > div").appendChild(span.cloneNode(true));
   
   button.textContent = "";
@@ -149,32 +149,32 @@ function renderTasks(projectIndex, taskIndex) {
     .append(div.cloneNode(true), div.cloneNode(true));
 
   document.querySelector(".task-card.dialog-card > div:nth-child(2) > div:nth-child(1)")
-    .innerHTML = `<strong>Task:</strong> ${project.taskList[taskIndex].content}`;
+    .innerHTML = `<strong>Task:</strong> `;
 
   document.querySelector(".task-card.dialog-card > div:nth-child(2) > div:nth-child(2)")
     .append(div.cloneNode(true), div.cloneNode(true), div.cloneNode(true));
 
   document.querySelector(".task-card.dialog-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)")
-    .textContent = `Created: ${project.taskList[taskIndex].created}`;
+    .textContent = `Created: `;
   document.querySelector(".task-card.dialog-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(2)")
-    .textContent = `Last Edited: ${project.taskList[taskIndex].edited}`;
+    .textContent = `Last Edited: `;
   document.querySelector(".task-card.dialog-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(3)")
-    .textContent = `Due Date: ${project.taskList[taskIndex].dueDate}`;
+    .textContent = `Due Date: `;
 
   document.querySelector(".task-card.dialog-card").appendChild(div.cloneNode(true));
 
-  if(project.taskList[taskIndex].priority === 'low') {
-    div.className = "low-priority";
-    div.textContent = "Priority: Low";
-  }
-  if(project.taskList[taskIndex].priority === 'medium') {
-    div.className = "medium-priority";
-    div.textContent = "Priority: Medium";
-  }
-  if(project.taskList[taskIndex].priority === 'high') {
-    div.className = "high-priority";
-    div.textContent = "Priority: High";
-  }
+  // if(project.taskList[taskIndex].priority === 'low') {
+  //   div.className = "low-priority";
+  //   div.textContent = "Priority: Low";
+  // }
+  // if(project.taskList[taskIndex].priority === 'medium') {
+  //   div.className = "medium-priority";
+  //   div.textContent = "Priority: Medium";
+  // }
+  // if(project.taskList[taskIndex].priority === 'high') {
+  //   div.className = "high-priority";
+  //   div.textContent = "Priority: High";
+  // }
 
   document.querySelector(".task-card.dialog-card > div:nth-child(3)").appendChild(div.cloneNode(true));
 
@@ -186,11 +186,11 @@ function renderTasks(projectIndex, taskIndex) {
   document.querySelector(".task-card.dialog-card > div:nth-child(3) > div:nth-child(2)")
     .append(button.cloneNode(true), button.cloneNode(true), button.cloneNode(true));
 
-  if(project.taskList[taskIndex].isDone === true) {
-    image.src = checkGreen;
-  } else {
-    image.src = check;
-  }
+  // if(project.taskList[taskIndex].isDone === true) {
+  //   image.src = checkGreen;
+  // } else {
+  //   image.src = check;
+  // }
   document.querySelector(".task-card.dialog-card > div:nth-child(3) > div:nth-child(2) > button:nth-child(1)")
     .appendChild(image.cloneNode(true));
 
@@ -400,3 +400,92 @@ function renderTasks(projectIndex, taskIndex) {
 }
 
 export {renderTasks}
+
+
+
+
+
+
+
+// const dialog = document.createElement("dialog");
+// dialog.id = "task-dialog";
+// body.appendChild(dialog.cloneNode(true));
+
+// div.className = "task-card dialog-card";
+// if(project.taskList[taskIndex].isDone === true) {
+//   div.className += " completed";
+// }
+// div.textContent = "";
+// document.querySelector("dialog#task-dialog").appendChild(div.cloneNode(true));
+
+// div.removeAttribute('class');
+// document.querySelector(".task-card.dialog-card").appendChild(div.cloneNode(true));
+
+// span.textContent = project.taskList[taskIndex].title;
+// document.querySelector(".task-card.dialog-card > div").appendChild(span.cloneNode(true));
+
+// button.textContent = "";
+// button.className = "close-dialog"
+// document.querySelector(".task-card.dialog-card > div").appendChild(button.cloneNode(true));
+
+// image.src = windowClose;
+// document.querySelector(".task-card.dialog-card > div > button").appendChild(image.cloneNode(true));
+
+// document.querySelector(".task-card.dialog-card").appendChild(div.cloneNode(true));
+
+// document.querySelector(".task-card.dialog-card > div:nth-child(2)")
+//   .append(div.cloneNode(true), div.cloneNode(true));
+
+// document.querySelector(".task-card.dialog-card > div:nth-child(2) > div:nth-child(1)")
+//   .innerHTML = `<strong>Task:</strong> ${project.taskList[taskIndex].content}`;
+
+// document.querySelector(".task-card.dialog-card > div:nth-child(2) > div:nth-child(2)")
+//   .append(div.cloneNode(true), div.cloneNode(true), div.cloneNode(true));
+
+// document.querySelector(".task-card.dialog-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)")
+//   .textContent = `Created: ${project.taskList[taskIndex].created}`;
+// document.querySelector(".task-card.dialog-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(2)")
+//   .textContent = `Last Edited: ${project.taskList[taskIndex].edited}`;
+// document.querySelector(".task-card.dialog-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(3)")
+//   .textContent = `Due Date: ${project.taskList[taskIndex].dueDate}`;
+
+// document.querySelector(".task-card.dialog-card").appendChild(div.cloneNode(true));
+
+// if(project.taskList[taskIndex].priority === 'low') {
+//   div.className = "low-priority";
+//   div.textContent = "Priority: Low";
+// }
+// if(project.taskList[taskIndex].priority === 'medium') {
+//   div.className = "medium-priority";
+//   div.textContent = "Priority: Medium";
+// }
+// if(project.taskList[taskIndex].priority === 'high') {
+//   div.className = "high-priority";
+//   div.textContent = "Priority: High";
+// }
+
+// document.querySelector(".task-card.dialog-card > div:nth-child(3)").appendChild(div.cloneNode(true));
+
+// div.removeAttribute('class');
+// div.textContent = "";
+// document.querySelector(".task-card.dialog-card > div:nth-child(3)").appendChild(div.cloneNode(true));
+
+// button.removeAttribute("class");
+// document.querySelector(".task-card.dialog-card > div:nth-child(3) > div:nth-child(2)")
+//   .append(button.cloneNode(true), button.cloneNode(true), button.cloneNode(true));
+
+// if(project.taskList[taskIndex].isDone === true) {
+//   image.src = checkGreen;
+// } else {
+//   image.src = check;
+// }
+// document.querySelector(".task-card.dialog-card > div:nth-child(3) > div:nth-child(2) > button:nth-child(1)")
+//   .appendChild(image.cloneNode(true));
+
+// image.src = pencil;
+// document.querySelector(".task-card.dialog-card > div:nth-child(3) > div:nth-child(2) > button:nth-child(2)")
+//   .appendChild(image.cloneNode(true));
+
+// image.src = trashCan;
+// document.querySelector(".task-card.dialog-card > div:nth-child(3) > div:nth-child(2) > button:nth-child(3)")
+//   .appendChild(image.cloneNode(true));
