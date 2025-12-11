@@ -54,7 +54,7 @@ function renderHome() {
     div.textContent = `Created: ${projectObject.created}`;
     document.querySelector("div.project-card:last-child > div:nth-child(2)").append(div.cloneNode(true));
 
-    div.textContent = `Last Edited: ${projectObject.created}`;
+    div.textContent = `Last Edited: ${projectObject.edited}`;
     document.querySelector("div.project-card:last-child > div:nth-child(2)").append(div.cloneNode(true));
 
     div.textContent = `Number of Tasks: ${projectObject.numberOfTasks}`;
@@ -144,10 +144,10 @@ function renderHome() {
   document.querySelector("#edit-project-dialog > form > div.edit-project-dialog-row.form-content").append(div.cloneNode(true));
   document.querySelector("#edit-project-dialog > form > div.edit-project-dialog-row.form-content > div").append(div.cloneNode(true));
 
-  label.setAttribute("for", "title");
+  label.setAttribute("for", "title-1");
   label.textContent = "Project Title* "
   input.setAttribute("type", "text");
-  input.setAttribute("id", "title");
+  input.setAttribute("id", "title-1");
   input.setAttribute("minlength", "2");
   input.setAttribute("maxlength", "25");
   input.setAttribute("required", '');
@@ -157,10 +157,12 @@ function renderHome() {
 
   div.setAttribute("class", "edit-project-dialog-row");
   button.removeAttribute("class");
+  button.setAttribute("type", "submit");
   button.textContent = "Apply Changes";
   
   document.querySelector("#edit-project-dialog > form").append(div.cloneNode(true));
   document.querySelector("#edit-project-dialog > form > div.edit-project-dialog-row:nth-child(3)").append(button.cloneNode(true));
+  button.removeAttribute("type");
 
 
 

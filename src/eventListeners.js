@@ -39,6 +39,34 @@ function addHomepageHandlers() {
       addHomepageHandlers();
     }
   })
+
+  let lastClickedProjectIndex;
+  const editProjectButtons = document.querySelectorAll(".project-card > div:nth-child(3) > button:nth-child(2)");
+  editProjectButtons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      document.querySelector("#edit-project-dialog").showModal()
+
+      const currentProject = JSON.parse(localStorage.getItem(Object.keys(localStorage)[index]));
+      document.querySelector("#edit-project-dialog .form-content input").value = currentProject.title;
+      lastClickedProjectIndex = index;
+    })
+  })
+
+  const editProjectDialogButton = document.querySelector(".edit-project-dialog-row:nth-child(3) > button");
+  editProjectDialogButton.addEventListener("click", () => {
+    console.log(lastClickedProjectIndex);
+    if(document.querySelector("#title-1").checkValidity()) {
+      const currentProject = JSON.parse(localStorage.getItem(Object.keys(localStorage)[lastClickedProjectIndex]));
+      if(currentProject.title != document.querySelector("#edit-project-dialog .form-content input").value) {
+        currentProject.edited = Date().substring(4, 21);
+        currentProject.title = document.querySelector("#edit-project-dialog .form-content input").value;
+        localStorage.setItem(`project${lastClickedProjectIndex + 1}`, JSON.stringify(currentProject));
+
+        renderHome();
+        addHomepageHandlers();
+      }   
+    }
+  })
 }
 
 export {addHomepageHandlers}
