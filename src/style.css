@@ -105,7 +105,7 @@ div.task-card:hover {
 }
 
 div.task-card.completed {
-  border: solid 1px green;
+  border: solid 3px green;
 }
 
 div.task-card.completed:hover {

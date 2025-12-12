@@ -51,13 +51,13 @@ function renderHome() {
     span.textContent = projectObject.title;
     document.querySelector("div.project-card:last-child > div:first-child").append(span.cloneNode(true));
 
-    div.textContent = `Created: ${projectObject.created}`;
+    div.innerHTML = `<strong>Created:</strong> ${projectObject.created}`;
     document.querySelector("div.project-card:last-child > div:nth-child(2)").append(div.cloneNode(true));
 
-    div.textContent = `Last Edited: ${projectObject.edited}`;
+    div.innerHTML = `<strong>Last Edited:</strong> ${projectObject.edited}`;
     document.querySelector("div.project-card:last-child > div:nth-child(2)").append(div.cloneNode(true));
 
-    div.textContent = `Number of Tasks: ${projectObject.numberOfTasks}`;
+    div.innerHTML = `<strong>Number of Tasks:</strong> ${projectObject.numberOfTasks}`;
     document.querySelector("div.project-card:last-child > div:nth-child(2)").append(div.cloneNode(true));
 
     document.querySelector("div.project-card:last-child > div:nth-child(3)").append(button.cloneNode(true), button.cloneNode(true), button.cloneNode(true));

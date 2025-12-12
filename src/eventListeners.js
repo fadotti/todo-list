@@ -49,7 +49,6 @@ function addHomepageHandlers() {
       const currentProject = JSON.parse(localStorage.getItem(Object.keys(localStorage).sort()[index]));
       document.querySelector("#edit-project-dialog .form-content input").value = currentProject.title;
       lastClickedProjectIndex = index;
-      console.log(index);
     })
   })
 
@@ -88,17 +87,174 @@ function addHomepageHandlers() {
   const openProjectButtons = document.querySelectorAll(".project-card > div:nth-child(3) > button:nth-child(1)");
   openProjectButtons.forEach((button, index) => {
     button.addEventListener("click", () => {
-      renderTasks(index, 0);
-      addProjectHandlers(0);
+      // lastClickedProjectIndex = index;
+      renderTasks(index);
+      addProjectHandlers(index);
     })
   })
 }
 
 function addProjectHandlers(projectIndex) {
+  const currentProject = JSON.parse(localStorage.getItem(Object.keys(localStorage).sort()[projectIndex]));
+  Object.defineProperty(currentProject, 'numberOfTasks', {
+      get: function() {
+        return this.taskList.length
+      }
+    })
+
+    Object.defineProperty(currentProject, 'addTask', {
+      value: function(task) {
+        this.taskList.push(task);
+      }
+    })
+  
   const homeButton = document.querySelector("div#nav > button:nth-child(1)");
   homeButton.addEventListener("click", () => {
     renderHome();
     addHomepageHandlers();
+  })
+
+  const addTaskButton = document.querySelector("div#nav > button:nth-child(2)");
+  addTaskButton.addEventListener("click", () => {
+    document.querySelector("#add-task-dialog").showModal()
+  })
+
+  const closeButtons = document.querySelectorAll("button.close-dialog");
+  closeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      button.closest("dialog").close()
+    })
+  })
+
+  const addTaskDialogButton = document.querySelector(".add-task-dialog-row:nth-child(3) > button");
+  addTaskDialogButton.addEventListener("click", () => {
+    if(document.querySelector("#title-2").checkValidity() &&
+    document.querySelector("#due-date").checkValidity()) {
+      const year = document.querySelector("#due-date").value.substring(0, 4);
+      const day = document.querySelector("#due-date").value.substring(8);
+      let month;
+      switch(document.querySelector("#due-date").value.substring(5, 7)) {
+        case "01":
+          month = "Jan";
+          break;
+        case "02":
+          month = "Feb";
+          break;
+        case "03":
+          month = "Mar";
+          break;
+        case "04":
+          month = "Apr";
+          break;
+        case "05":
+          month = "May";
+          break;
+        case "06":
+          month = "Jun";
+          break;
+        case "07":
+          month = "Jul";
+          break;
+        case "08":
+          month = "Aug";
+          break;
+        case "09":
+          month = "Sep";
+          break;
+        case "10":
+          month = "Oct";
+          break;
+        case "11":
+          month = "Nov";
+          break;
+        case "12":
+          month = "Dec";
+          break;
+      }
+      const newTask = new Task(
+        document.querySelector("#title-2").value,
+        document.querySelector("#task-text").value,
+        Date().substring(4, 21),
+        Date().substring(4, 21),
+        `${month} ${day} ${year} 00:00`,
+        document.querySelector("#priority-select").value,
+        false
+      )
+
+      currentProject.addTask(newTask);
+      currentProject.edited = Date().substring(4, 21);
+      localStorage.setItem(`project${projectIndex + 1}`, JSON.stringify(currentProject));
+      addTaskDialogButton.closest("dialog").close();
+      renderTasks(projectIndex);
+      addProjectHandlers(projectIndex);
+    }
+  })
+
+  const changeCompletionStatusButtons = document.querySelectorAll(".task-card:not(.dialog-card) > div:nth-child(3) button:nth-child(1)");
+  changeCompletionStatusButtons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      currentProject.taskList[index].isDone = (currentProject.taskList[index].isDone) ? false : true;
+      currentProject.taskList[index].edited = Date().substring(4, 21);
+      currentProject.edited = Date().substring(4, 21);
+      localStorage.setItem(`project${projectIndex + 1}`, JSON.stringify(currentProject));
+      renderTasks(projectIndex);
+      addProjectHandlers(projectIndex);
+    })
+  })
+
+  let lastClickedTaskIndex;
+  const editTaskButtons = document.querySelectorAll(".task-card:not(.dialog-card) > div:nth-child(3) button:nth-child(2)");
+  editTaskButtons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      document.querySelector("#title-3").value = currentProject.taskList[index].title;
+      document.querySelector("#task-text-2").value = currentProject.taskList[index].content;
+      const year = currentProject.taskList[index].dueDate.substring(7, 11);
+      const day = currentProject.taskList[index].dueDate.substring(4, 6);
+      let month;
+      switch(currentProject.taskList[index].dueDate.substring(0, 3)) {
+        case "Jan":
+          month = "01";
+          break;
+        case "Feb":
+          month = "02";
+          break;
+        case "Mar":
+          month = "03";
+          break;
+        case "Apr":
+          month = "04";
+          break;
+        case "May":
+          month = "05";
+          break;
+        case "Jun":
+          month = "06";
+          break;
+        case "Jul":
+          month = "07";
+          break;
+        case "Aug":
+          month = "08";
+          break;
+        case "Sep":
+          month = "09";
+          break;
+        case "Oct":
+          month = "10";
+          break;
+        case "Nov":
+          month = "11";
+          break;
+        case "Dec":
+          month = "12";
+          break;
+      }
+      document.querySelector("#due-date-2").value = `${year}-${month}-${day}`;
+      document.querySelector("#priority-select-2").value = currentProject.taskList[index].priority;
+
+      lastClickedTaskIndex = index;
+      document.querySelector("#edit-task-dialog").showModal();
+    })
   })
 }
 

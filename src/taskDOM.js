@@ -40,7 +40,7 @@ function renderTasks(projectIndex) {
   div.removeAttribute('id');
   document.querySelector("#project-container").appendChild(div.cloneNode(true));
 
-  const project = JSON.parse(localStorage.getItem(Object.keys(localStorage)[projectIndex]));
+  const project = JSON.parse(localStorage.getItem(Object.keys(localStorage).sort()[projectIndex]));
 
   div.id = "project-banner";
   div.textContent = project.title;
@@ -70,11 +70,11 @@ function renderTasks(projectIndex) {
     document.querySelector(".task-card:last-child > div:nth-child(2) > div:nth-child(1)")
       .innerHTML = `<strong>Task:</strong> ${task.content}`;
     document.querySelector(".task-card:last-child > div:nth-child(2) > div:nth-child(2)")
-      .textContent = `Created: ${task.created}`;
+      .innerHTML = `<strong>Created:</strong> ${task.created}`;
     document.querySelector(".task-card:last-child > div:nth-child(2) > div:nth-child(3)")
-      .textContent = `Last Edited: ${task.edited}`;
+      .innerHTML = `<strong>Last Edited:</strong> ${task.edited}`;
     document.querySelector(".task-card:last-child > div:nth-child(2) > div:nth-child(4)")
-      .textContent = `Due Date: ${task.dueDate}`;
+      .innerHTML = `<strong>Due Date:</strong> ${task.dueDate}`;
 
     document.querySelector(".task-card:last-child").appendChild(div.cloneNode(true));
 
@@ -284,10 +284,12 @@ function renderTasks(projectIndex) {
 
   div.setAttribute("class", "add-task-dialog-row");
   button.removeAttribute("class");
+  button.setAttribute("type", "submit");
   button.textContent = "Add Task";
   
   document.querySelector("#add-task-dialog > form").append(div.cloneNode(true));
   document.querySelector("#add-task-dialog > form > div.add-task-dialog-row:nth-child(3)").append(button.cloneNode(true));
+  button.removeAttribute("type");
 
 
 
@@ -400,92 +402,3 @@ function renderTasks(projectIndex) {
 }
 
 export {renderTasks}
-
-
-
-
-
-
-
-// const dialog = document.createElement("dialog");
-// dialog.id = "task-dialog";
-// body.appendChild(dialog.cloneNode(true));
-
-// div.className = "task-card dialog-card";
-// if(project.taskList[taskIndex].isDone === true) {
-//   div.className += " completed";
-// }
-// div.textContent = "";
-// document.querySelector("dialog#task-dialog").appendChild(div.cloneNode(true));
-
-// div.removeAttribute('class');
-// document.querySelector(".task-card.dialog-card").appendChild(div.cloneNode(true));
-
-// span.textContent = project.taskList[taskIndex].title;
-// document.querySelector(".task-card.dialog-card > div").appendChild(span.cloneNode(true));
-
-// button.textContent = "";
-// button.className = "close-dialog"
-// document.querySelector(".task-card.dialog-card > div").appendChild(button.cloneNode(true));
-
-// image.src = windowClose;
-// document.querySelector(".task-card.dialog-card > div > button").appendChild(image.cloneNode(true));
-
-// document.querySelector(".task-card.dialog-card").appendChild(div.cloneNode(true));
-
-// document.querySelector(".task-card.dialog-card > div:nth-child(2)")
-//   .append(div.cloneNode(true), div.cloneNode(true));
-
-// document.querySelector(".task-card.dialog-card > div:nth-child(2) > div:nth-child(1)")
-//   .innerHTML = `<strong>Task:</strong> ${project.taskList[taskIndex].content}`;
-
-// document.querySelector(".task-card.dialog-card > div:nth-child(2) > div:nth-child(2)")
-//   .append(div.cloneNode(true), div.cloneNode(true), div.cloneNode(true));
-
-// document.querySelector(".task-card.dialog-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)")
-//   .textContent = `Created: ${project.taskList[taskIndex].created}`;
-// document.querySelector(".task-card.dialog-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(2)")
-//   .textContent = `Last Edited: ${project.taskList[taskIndex].edited}`;
-// document.querySelector(".task-card.dialog-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(3)")
-//   .textContent = `Due Date: ${project.taskList[taskIndex].dueDate}`;
-
-// document.querySelector(".task-card.dialog-card").appendChild(div.cloneNode(true));
-
-// if(project.taskList[taskIndex].priority === 'low') {
-//   div.className = "low-priority";
-//   div.textContent = "Priority: Low";
-// }
-// if(project.taskList[taskIndex].priority === 'medium') {
-//   div.className = "medium-priority";
-//   div.textContent = "Priority: Medium";
-// }
-// if(project.taskList[taskIndex].priority === 'high') {
-//   div.className = "high-priority";
-//   div.textContent = "Priority: High";
-// }
-
-// document.querySelector(".task-card.dialog-card > div:nth-child(3)").appendChild(div.cloneNode(true));
-
-// div.removeAttribute('class');
-// div.textContent = "";
-// document.querySelector(".task-card.dialog-card > div:nth-child(3)").appendChild(div.cloneNode(true));
-
-// button.removeAttribute("class");
-// document.querySelector(".task-card.dialog-card > div:nth-child(3) > div:nth-child(2)")
-//   .append(button.cloneNode(true), button.cloneNode(true), button.cloneNode(true));
-
-// if(project.taskList[taskIndex].isDone === true) {
-//   image.src = checkGreen;
-// } else {
-//   image.src = check;
-// }
-// document.querySelector(".task-card.dialog-card > div:nth-child(3) > div:nth-child(2) > button:nth-child(1)")
-//   .appendChild(image.cloneNode(true));
-
-// image.src = pencil;
-// document.querySelector(".task-card.dialog-card > div:nth-child(3) > div:nth-child(2) > button:nth-child(2)")
-//   .appendChild(image.cloneNode(true));
-
-// image.src = trashCan;
-// document.querySelector(".task-card.dialog-card > div:nth-child(3) > div:nth-child(2) > button:nth-child(3)")
-//   .appendChild(image.cloneNode(true));
