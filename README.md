@@ -14,7 +14,7 @@ The goal of this project was to create a basic todo list application dynamically
 - The code was modularized as follows:
   - `projects.js` creates project and task classes and exports instances of them that will be used to initialize the application.
   - `index.js` handles the logic of the application. If the `localStorage` is empty, it populates it with the default instances from `projects.js`. Otherwise, it renders the homepage with the user's projects.
-  - `homeDOM.js` populates the homepage's HTML dynamically.
-  - `taskDOM.js` populates a project's HTML dynamically.
+  - `homeDOM.js` contains the function that populates the homepage's HTML dynamically.
+  - `taskDOM.js` contains the function that populates a project's HTML dynamically.
   - `eventListeners.js` contains every event handler.
 - Dates were created by selecting a desired substring from the built-in `Date()` function.
