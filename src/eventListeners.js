@@ -256,6 +256,72 @@ function addProjectHandlers(projectIndex) {
       document.querySelector("#edit-task-dialog").showModal();
     })
   })
+
+  const editTaskDialogButton = document.querySelector("#edit-task-dialog div:nth-child(3) > button");
+  editTaskDialogButton.addEventListener("click", () => {
+    if(document.querySelector("#title-3").checkValidity() &&
+    document.querySelector("#due-date-2").checkValidity()) {
+      const year = document.querySelector("#due-date-2").value.substring(0, 4);
+      const day = document.querySelector("#due-date-2").value.substring(8);
+      let month;
+      switch(document.querySelector("#due-date-2").value.substring(5, 7)) {
+        case "01":
+          month = "Jan";
+          break;
+        case "02":
+          month = "Feb";
+          break;
+        case "03":
+          month = "Mar";
+          break;
+        case "04":
+          month = "Apr";
+          break;
+        case "05":
+          month = "May";
+          break;
+        case "06":
+          month = "Jun";
+          break;
+        case "07":
+          month = "Jul";
+          break;
+        case "08":
+          month = "Aug";
+          break;
+        case "09":
+          month = "Sep";
+          break;
+        case "10":
+          month = "Oct";
+          break;
+        case "11":
+          month = "Nov";
+          break;
+        case "12":
+          month = "Dec";
+          break;
+      }
+
+      if(currentProject.taskList[lastClickedTaskIndex].title != document.querySelector("#title-3").value ||
+      currentProject.taskList[lastClickedTaskIndex].content != document.querySelector("#task-text-2").value ||
+      currentProject.taskList[lastClickedTaskIndex].dueDate != `${month} ${day} ${year} 00:00` ||
+      currentProject.taskList[lastClickedTaskIndex].priority != document.querySelector("#priority-select-2").value) {
+        currentProject.taskList[lastClickedTaskIndex].edited = Date().substring(4, 21);
+        currentProject.edited = Date().substring(4, 21);
+        currentProject.taskList[lastClickedTaskIndex].title = document.querySelector("#title-3").value;
+        currentProject.taskList[lastClickedTaskIndex].content = document.querySelector("#task-text-2").value;
+        currentProject.taskList[lastClickedTaskIndex].dueDate = `${month} ${day} ${year} 00:00`;
+        currentProject.taskList[lastClickedTaskIndex].priority = document.querySelector("#priority-select-2").value;
+
+        localStorage.setItem(`project${projectIndex + 1}`, JSON.stringify(currentProject));
+      }
+
+      editTaskDialogButton.closest("dialog").close();
+      renderTasks(projectIndex);
+      addProjectHandlers(projectIndex);
+    }
+  })
 }
 
 export {addHomepageHandlers}
