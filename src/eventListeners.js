@@ -1,6 +1,7 @@
 import { Task, Project } from "./projects";
 import { renderHome } from "./homeDOM";
 import { renderTasks } from "./taskDOM";
+import checkGreen from "./assets/checkGreen.svg";
 
 function addHomepageHandlers() {
   const inputs = document.querySelectorAll("input");
@@ -87,7 +88,6 @@ function addHomepageHandlers() {
   const openProjectButtons = document.querySelectorAll(".project-card > div:nth-child(3) > button:nth-child(1)");
   openProjectButtons.forEach((button, index) => {
     button.addEventListener("click", () => {
-      // lastClickedProjectIndex = index;
       renderTasks(index);
       addProjectHandlers(index);
     })
@@ -122,7 +122,9 @@ function addProjectHandlers(projectIndex) {
   const closeButtons = document.querySelectorAll("button.close-dialog");
   closeButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      button.closest("dialog").close()
+      button.closest("dialog").close();
+      renderTasks(projectIndex);
+      addProjectHandlers(projectIndex);
     })
   })
 
@@ -192,7 +194,8 @@ function addProjectHandlers(projectIndex) {
 
   const changeCompletionStatusButtons = document.querySelectorAll(".task-card:not(.dialog-card) > div:nth-child(3) button:nth-child(1)");
   changeCompletionStatusButtons.forEach((button, index) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
       currentProject.taskList[index].isDone = (currentProject.taskList[index].isDone) ? false : true;
       currentProject.taskList[index].edited = Date().substring(4, 21);
       currentProject.edited = Date().substring(4, 21);
@@ -205,7 +208,8 @@ function addProjectHandlers(projectIndex) {
   let lastClickedTaskIndex;
   const editTaskButtons = document.querySelectorAll(".task-card:not(.dialog-card) > div:nth-child(3) button:nth-child(2)");
   editTaskButtons.forEach((button, index) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
       document.querySelector("#title-3").value = currentProject.taskList[index].title;
       document.querySelector("#task-text-2").value = currentProject.taskList[index].content;
       const year = currentProject.taskList[index].dueDate.substring(7, 11);
@@ -321,6 +325,80 @@ function addProjectHandlers(projectIndex) {
       renderTasks(projectIndex);
       addProjectHandlers(projectIndex);
     }
+  })
+
+  const deleteTaskButtons = document.querySelectorAll(".task-card:not(.dialog-card) > div:nth-child(3) button:nth-child(3)");
+  deleteTaskButtons.forEach((button, index) => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      lastClickedTaskIndex = index;
+      document.querySelector("#delete-task-dialog").showModal();
+    })
+  })
+
+  const deleteTaskDialogButton = document.querySelector("#delete-task-dialog div:nth-child(3) > button");
+  deleteTaskDialogButton.addEventListener("click", () => {
+    currentProject.taskList.splice(lastClickedTaskIndex, 1);
+    currentProject.edited = Date().substring(4, 21);
+
+    localStorage.setItem(`project${projectIndex + 1}`, JSON.stringify(currentProject));
+
+    deleteTaskDialogButton.closest("dialog").close();
+    renderTasks(projectIndex);
+    addProjectHandlers(projectIndex);
+  })
+
+  const taskCards = document.querySelectorAll(".task-card:not(.dialog-card)");
+  taskCards.forEach((card, index) => {
+    card.addEventListener("click", () => {
+      lastClickedTaskIndex = index;
+      document.querySelector("#task-dialog > .task-card > div:first-child > span")
+        .textContent = currentProject.taskList[index].title;
+      document.querySelector("#task-dialog > .task-card > div:nth-child(2) > div")
+        .innerHTML += ` ${currentProject.taskList[index].content}`;
+      document.querySelector("#task-dialog > .task-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)")
+        .innerHTML += `${currentProject.taskList[index].created}`;
+      document.querySelector("#task-dialog > .task-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(2)")
+        .innerHTML += `${currentProject.taskList[index].edited}`;
+      document.querySelector("#task-dialog > .task-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(3)")
+        .innerHTML += `${currentProject.taskList[index].dueDate}`;
+      if(currentProject.taskList[index].isDone === true) {
+        document.querySelector(".task-card.dialog-card > div:nth-child(3) > div:nth-child(2) > button:nth-child(1) > img")
+          .src = checkGreen;
+        document.querySelector("#task-dialog > .task-card").className += " completed";
+      }
+      document.querySelector("#task-dialog").showModal();
+    })
+  })
+
+  const changeCompletionStatusDialogButton = document.querySelector(".task-card.dialog-card > div:nth-child(3) button:nth-child(1)");
+  changeCompletionStatusDialogButton.addEventListener("click", (event) => {
+    event.stopPropagation();
+    currentProject.taskList[lastClickedTaskIndex].isDone = (currentProject.taskList[lastClickedTaskIndex].isDone) ? false : true;
+    currentProject.taskList[lastClickedTaskIndex].edited = Date().substring(4, 21);
+    currentProject.edited = Date().substring(4, 21);
+    localStorage.setItem(`project${projectIndex + 1}`, JSON.stringify(currentProject));
+
+    renderTasks(projectIndex);
+    addProjectHandlers(projectIndex);
+
+    document.querySelectorAll(".task-card:not(.dialog-card)")[lastClickedTaskIndex].click();
+  })
+
+  const editTaskFromDialogButton = document.querySelector(".task-card.dialog-card > div:nth-child(3) button:nth-child(2)");
+  editTaskFromDialogButton.addEventListener("click", (event) => {
+    event.stopPropagation();
+    editTaskFromDialogButton.closest("dialog").close();
+
+    editTaskButtons[lastClickedTaskIndex].click();
+  })
+
+  const deleteTaskFromDialogButton = document.querySelector(".task-card.dialog-card > div:nth-child(3) button:nth-child(3)");
+  deleteTaskFromDialogButton.addEventListener("click", (event) => {
+    event.stopPropagation();
+    deleteTaskFromDialogButton.closest("dialog").close();
+
+    deleteTaskButtons[lastClickedTaskIndex].click();
   })
 }
 

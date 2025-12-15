@@ -124,9 +124,6 @@ function renderTasks(projectIndex) {
   body.appendChild(dialog.cloneNode(true));
 
   div.className = "task-card dialog-card";
-  // if(project.taskList[taskIndex].isDone === true) {
-  //   div.className += " completed";
-  // }
   div.textContent = "";
   document.querySelector("dialog#task-dialog").appendChild(div.cloneNode(true));
 
@@ -155,27 +152,13 @@ function renderTasks(projectIndex) {
     .append(div.cloneNode(true), div.cloneNode(true), div.cloneNode(true));
 
   document.querySelector(".task-card.dialog-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)")
-    .textContent = `Created: `;
+    .innerHTML = `<strong>Created:</strong> `;
   document.querySelector(".task-card.dialog-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(2)")
-    .textContent = `Last Edited: `;
+    .innerHTML = `<strong>Last Edited:</strong> `;
   document.querySelector(".task-card.dialog-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(3)")
-    .textContent = `Due Date: `;
+    .innerHTML = `<strong>Due Date:</strong> `;
 
   document.querySelector(".task-card.dialog-card").appendChild(div.cloneNode(true));
-
-  // if(project.taskList[taskIndex].priority === 'low') {
-  //   div.className = "low-priority";
-  //   div.textContent = "Priority: Low";
-  // }
-  // if(project.taskList[taskIndex].priority === 'medium') {
-  //   div.className = "medium-priority";
-  //   div.textContent = "Priority: Medium";
-  // }
-  // if(project.taskList[taskIndex].priority === 'high') {
-  //   div.className = "high-priority";
-  //   div.textContent = "Priority: High";
-  // }
-
   document.querySelector(".task-card.dialog-card > div:nth-child(3)").appendChild(div.cloneNode(true));
 
   div.removeAttribute('class');
@@ -186,11 +169,7 @@ function renderTasks(projectIndex) {
   document.querySelector(".task-card.dialog-card > div:nth-child(3) > div:nth-child(2)")
     .append(button.cloneNode(true), button.cloneNode(true), button.cloneNode(true));
 
-  // if(project.taskList[taskIndex].isDone === true) {
-  //   image.src = checkGreen;
-  // } else {
-  //   image.src = check;
-  // }
+    image.src = check;
   document.querySelector(".task-card.dialog-card > div:nth-child(3) > div:nth-child(2) > button:nth-child(1)")
     .appendChild(image.cloneNode(true));
 
@@ -203,11 +182,7 @@ function renderTasks(projectIndex) {
     .appendChild(image.cloneNode(true));
 
 
-
-
-
-
-
+    
 
   
   dialog.id = "add-task-dialog";
