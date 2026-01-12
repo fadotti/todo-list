@@ -35,7 +35,8 @@ function addHomepageHandlers() {
         []
       )
       addProjectDialogButton.closest("dialog").close();
-      localStorage.setItem(`project${Object.keys(localStorage).length + 1}`, JSON.stringify(newProject));
+      const lastProjectNumber = Number(Object.keys(localStorage).sort().at(-1).substring(7));
+      localStorage.setItem(`project${lastProjectNumber + 1}`, JSON.stringify(newProject));
       renderHome();
       addHomepageHandlers();
     }
@@ -60,7 +61,7 @@ function addHomepageHandlers() {
       if(currentProject.title != document.querySelector("#edit-project-dialog .form-content input").value) {
         currentProject.edited = Date().substring(4, 21);
         currentProject.title = document.querySelector("#edit-project-dialog .form-content input").value;
-        localStorage.setItem(`project${lastClickedProjectIndex + 1}`, JSON.stringify(currentProject));
+        localStorage.setItem(Object.keys(localStorage).sort()[lastClickedProjectIndex], JSON.stringify(currentProject));
 
         renderHome();
         addHomepageHandlers();
@@ -185,7 +186,8 @@ function addProjectHandlers(projectIndex) {
 
       currentProject.addTask(newTask);
       currentProject.edited = Date().substring(4, 21);
-      localStorage.setItem(`project${projectIndex + 1}`, JSON.stringify(currentProject));
+      const currentProjectNumber = Number(Object.keys(localStorage).sort().at(-1).substring(7));
+      localStorage.setItem(`project${currentProjectNumber}`, JSON.stringify(currentProject));
       addTaskDialogButton.closest("dialog").close();
       renderTasks(projectIndex);
       addProjectHandlers(projectIndex);
@@ -199,7 +201,8 @@ function addProjectHandlers(projectIndex) {
       currentProject.taskList[index].isDone = (currentProject.taskList[index].isDone) ? false : true;
       currentProject.taskList[index].edited = Date().substring(4, 21);
       currentProject.edited = Date().substring(4, 21);
-      localStorage.setItem(`project${projectIndex + 1}`, JSON.stringify(currentProject));
+      const currentProjectNumber = Number(Object.keys(localStorage).sort().at(-1).substring(7));
+      localStorage.setItem(`project${currentProjectNumber}`, JSON.stringify(currentProject));
       renderTasks(projectIndex);
       addProjectHandlers(projectIndex);
     })
@@ -318,7 +321,8 @@ function addProjectHandlers(projectIndex) {
         currentProject.taskList[lastClickedTaskIndex].dueDate = `${month} ${day} ${year} 00:00`;
         currentProject.taskList[lastClickedTaskIndex].priority = document.querySelector("#priority-select-2").value;
 
-        localStorage.setItem(`project${projectIndex + 1}`, JSON.stringify(currentProject));
+        const currentProjectNumber = Number(Object.keys(localStorage).sort().at(-1).substring(7));
+        localStorage.setItem(`project${currentProjectNumber}`, JSON.stringify(currentProject));
       }
 
       editTaskDialogButton.closest("dialog").close();
@@ -341,7 +345,8 @@ function addProjectHandlers(projectIndex) {
     currentProject.taskList.splice(lastClickedTaskIndex, 1);
     currentProject.edited = Date().substring(4, 21);
 
-    localStorage.setItem(`project${projectIndex + 1}`, JSON.stringify(currentProject));
+    const currentProjectNumber = Number(Object.keys(localStorage).sort().at(-1).substring(7));
+    localStorage.setItem(`project${currentProjectNumber}`, JSON.stringify(currentProject));
 
     deleteTaskDialogButton.closest("dialog").close();
     renderTasks(projectIndex);
@@ -377,7 +382,8 @@ function addProjectHandlers(projectIndex) {
     currentProject.taskList[lastClickedTaskIndex].isDone = (currentProject.taskList[lastClickedTaskIndex].isDone) ? false : true;
     currentProject.taskList[lastClickedTaskIndex].edited = Date().substring(4, 21);
     currentProject.edited = Date().substring(4, 21);
-    localStorage.setItem(`project${projectIndex + 1}`, JSON.stringify(currentProject));
+    const currentProjectNumber = Number(Object.keys(localStorage).sort().at(-1).substring(7));
+    localStorage.setItem(`project${currentProjectNumber}`, JSON.stringify(currentProject));
 
     renderTasks(projectIndex);
     addProjectHandlers(projectIndex);
