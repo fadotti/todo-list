@@ -360,7 +360,7 @@ function addProjectHandlers(projectIndex) {
       document.querySelector("#task-dialog > .task-card > div:first-child > span")
         .textContent = currentProject.taskList[index].title;
       document.querySelector("#task-dialog > .task-card > div:nth-child(2) > div")
-        .innerHTML += ` ${currentProject.taskList[index].content}`;
+        .innerHTML += ` ${currentProject.taskList[index].content.replaceAll("\n", "<br>")}`;
       document.querySelector("#task-dialog > .task-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)")
         .innerHTML += `${currentProject.taskList[index].created}`;
       document.querySelector("#task-dialog > .task-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(2)")

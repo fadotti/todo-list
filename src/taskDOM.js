@@ -68,7 +68,7 @@ function renderTasks(projectIndex) {
       .append(div.cloneNode(true), div.cloneNode(true), div.cloneNode(true), div.cloneNode(true));
 
     document.querySelector(".task-card:last-child > div:nth-child(2) > div:nth-child(1)")
-      .innerHTML = `<strong>Task:</strong> ${task.content}`;
+      .innerHTML = `<strong>Task:</strong> ${task.content.replaceAll("\n", "<br>")}`;
     document.querySelector(".task-card:last-child > div:nth-child(2) > div:nth-child(2)")
       .innerHTML = `<strong>Created:</strong> ${task.created}`;
     document.querySelector(".task-card:last-child > div:nth-child(2) > div:nth-child(3)")
