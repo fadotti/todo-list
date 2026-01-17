@@ -42,7 +42,7 @@ div#project-container > div:nth-child(2) > div.task-card {
 dialog#task-dialog {
   padding: 0;
   border: none;
-  position: absolute;
+  position: fixed;
   top: 0vh;
 }
 

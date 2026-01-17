@@ -20,7 +20,8 @@ function addHomepageHandlers() {
 
   const closeButtons = document.querySelectorAll("button.close-dialog");
   closeButtons.forEach((button) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault()
       button.closest("dialog").close()
     })
   })
