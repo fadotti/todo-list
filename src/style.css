@@ -254,7 +254,7 @@ dialog {
   border: solid 1px #c2c2c2;
   border-radius: 5px;
   padding: 5px;
-  position: absolute;
+  position: fixed;
   top: -40vh;
 }
 

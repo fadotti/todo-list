@@ -56,7 +56,8 @@ function addHomepageHandlers() {
   })
 
   const editProjectDialogButton = document.querySelector(".edit-project-dialog-row:nth-child(3) > button");
-  editProjectDialogButton.addEventListener("click", () => {
+  editProjectDialogButton.addEventListener("click", (event) => {
+    event.preventDefault();
     if(document.querySelector("#title-1").checkValidity()) {
       const currentProject = JSON.parse(localStorage.getItem(Object.keys(localStorage).sort()[lastClickedProjectIndex]));
       if(currentProject.title != document.querySelector("#edit-project-dialog .form-content input").value) {
@@ -72,24 +73,27 @@ function addHomepageHandlers() {
 
   const deleteProjectButtons = document.querySelectorAll(".project-card > div:nth-child(3) > button:nth-child(3)");
   deleteProjectButtons.forEach((button, index) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
       document.querySelector("#delete-project-dialog").showModal()
       lastClickedProjectIndex = index;
     })
   })
 
   const deleteProjectDialogButton = document.querySelector(".delete-project-dialog-row:nth-child(3) > button");
-  deleteProjectDialogButton.addEventListener("click", () => {
-      const currentProjectKey = Object.keys(localStorage).sort()[lastClickedProjectIndex];
-        localStorage.removeItem(currentProjectKey);
+  deleteProjectDialogButton.addEventListener("click", (event) => {
+    event.preventDefault()
+    const currentProjectKey = Object.keys(localStorage).sort()[lastClickedProjectIndex];
+      localStorage.removeItem(currentProjectKey);
 
-        renderHome();
-        addHomepageHandlers();
+      renderHome();
+      addHomepageHandlers();
   })
 
   const openProjectButtons = document.querySelectorAll(".project-card > div:nth-child(3) > button:nth-child(1)");
   openProjectButtons.forEach((button, index) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
       renderTasks(index);
       addProjectHandlers(index);
     })
@@ -111,27 +115,31 @@ function addProjectHandlers(projectIndex) {
     })
   
   const homeButton = document.querySelector("div#nav > button:nth-child(1)");
-  homeButton.addEventListener("click", () => {
+  homeButton.addEventListener("click", (event) => {
+    event.preventDefault();
     renderHome();
     addHomepageHandlers();
   })
 
   const addTaskButton = document.querySelector("div#nav > button:nth-child(2)");
-  addTaskButton.addEventListener("click", () => {
+  addTaskButton.addEventListener("click", (event) => {
+    event.preventDefault();
     document.querySelector("#add-task-dialog").showModal()
   })
 
   const closeButtons = document.querySelectorAll("button.close-dialog");
   closeButtons.forEach((button) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
       button.closest("dialog").close();
-      renderTasks(projectIndex);
-      addProjectHandlers(projectIndex);
+      // renderTasks(projectIndex);
+      // addProjectHandlers(projectIndex);
     })
   })
 
   const addTaskDialogButton = document.querySelector(".add-task-dialog-row:nth-child(3) > button");
-  addTaskDialogButton.addEventListener("click", () => {
+  addTaskDialogButton.addEventListener("click", (event) => {
+    event.preventDefault();
     if(document.querySelector("#title-2").checkValidity() &&
     document.querySelector("#due-date").checkValidity()) {
       const year = document.querySelector("#due-date").value.substring(0, 4);
@@ -198,6 +206,7 @@ function addProjectHandlers(projectIndex) {
   const changeCompletionStatusButtons = document.querySelectorAll(".task-card:not(.dialog-card) > div:nth-child(3) button:nth-child(1)");
   changeCompletionStatusButtons.forEach((button, index) => {
     button.addEventListener("click", (event) => {
+      event.preventDefault();
       event.stopPropagation();
       currentProject.taskList[index].isDone = (currentProject.taskList[index].isDone) ? false : true;
       currentProject.taskList[index].edited = Date().substring(4, 21);
@@ -213,6 +222,7 @@ function addProjectHandlers(projectIndex) {
   const editTaskButtons = document.querySelectorAll(".task-card:not(.dialog-card) > div:nth-child(3) button:nth-child(2)");
   editTaskButtons.forEach((button, index) => {
     button.addEventListener("click", (event) => {
+      event.preventDefault();
       event.stopPropagation();
       document.querySelector("#title-3").value = currentProject.taskList[index].title;
       document.querySelector("#task-text-2").value = currentProject.taskList[index].content;
@@ -266,7 +276,8 @@ function addProjectHandlers(projectIndex) {
   })
 
   const editTaskDialogButton = document.querySelector("#edit-task-dialog div:nth-child(3) > button");
-  editTaskDialogButton.addEventListener("click", () => {
+  editTaskDialogButton.addEventListener("click", (event) => {
+    event.preventDefault();
     if(document.querySelector("#title-3").checkValidity() &&
     document.querySelector("#due-date-2").checkValidity()) {
       const year = document.querySelector("#due-date-2").value.substring(0, 4);
@@ -335,6 +346,7 @@ function addProjectHandlers(projectIndex) {
   const deleteTaskButtons = document.querySelectorAll(".task-card:not(.dialog-card) > div:nth-child(3) button:nth-child(3)");
   deleteTaskButtons.forEach((button, index) => {
     button.addEventListener("click", (event) => {
+      event.preventDefault();
       event.stopPropagation();
       lastClickedTaskIndex = index;
       document.querySelector("#delete-task-dialog").showModal();
@@ -342,7 +354,8 @@ function addProjectHandlers(projectIndex) {
   })
 
   const deleteTaskDialogButton = document.querySelector("#delete-task-dialog div:nth-child(3) > button");
-  deleteTaskDialogButton.addEventListener("click", () => {
+  deleteTaskDialogButton.addEventListener("click", (event) => {
+    event.preventDefault();
     currentProject.taskList.splice(lastClickedTaskIndex, 1);
     currentProject.edited = Date().substring(4, 21);
 
@@ -356,18 +369,19 @@ function addProjectHandlers(projectIndex) {
 
   const taskCards = document.querySelectorAll(".task-card:not(.dialog-card)");
   taskCards.forEach((card, index) => {
-    card.addEventListener("click", () => {
+    card.addEventListener("click", (event) => {
+      event.preventDefault();
       lastClickedTaskIndex = index;
       document.querySelector("#task-dialog > .task-card > div:first-child > span")
         .textContent = currentProject.taskList[index].title;
       document.querySelector("#task-dialog > .task-card > div:nth-child(2) > div")
-        .innerHTML += ` ${currentProject.taskList[index].content.replaceAll("\n", "<br>")}`;
+        .innerHTML = `<strong>Task: </strong> ${currentProject.taskList[index].content.replaceAll("\n", "<br>")}`;
       document.querySelector("#task-dialog > .task-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)")
-        .innerHTML += `${currentProject.taskList[index].created}`;
+        .innerHTML = `<strong>Created: </strong> ${currentProject.taskList[index].created}`;
       document.querySelector("#task-dialog > .task-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(2)")
-        .innerHTML += `${currentProject.taskList[index].edited}`;
+        .innerHTML = `<strong>Last Edited: </strong> ${currentProject.taskList[index].edited}`;
       document.querySelector("#task-dialog > .task-card > div:nth-child(2) > div:nth-child(2) > div:nth-child(3)")
-        .innerHTML += `${currentProject.taskList[index].dueDate}`;
+        .innerHTML = `<strong>Due Date: </strong> ${currentProject.taskList[index].dueDate}`;
       if(currentProject.taskList[index].isDone === true) {
         document.querySelector(".task-card.dialog-card > div:nth-child(3) > div:nth-child(2) > button:nth-child(1) > img")
           .src = checkGreen;
@@ -379,6 +393,7 @@ function addProjectHandlers(projectIndex) {
 
   const changeCompletionStatusDialogButton = document.querySelector(".task-card.dialog-card > div:nth-child(3) button:nth-child(1)");
   changeCompletionStatusDialogButton.addEventListener("click", (event) => {
+    event.preventDefault();
     event.stopPropagation();
     currentProject.taskList[lastClickedTaskIndex].isDone = (currentProject.taskList[lastClickedTaskIndex].isDone) ? false : true;
     currentProject.taskList[lastClickedTaskIndex].edited = Date().substring(4, 21);
@@ -394,6 +409,7 @@ function addProjectHandlers(projectIndex) {
 
   const editTaskFromDialogButton = document.querySelector(".task-card.dialog-card > div:nth-child(3) button:nth-child(2)");
   editTaskFromDialogButton.addEventListener("click", (event) => {
+    event.preventDefault();
     event.stopPropagation();
     editTaskFromDialogButton.closest("dialog").close();
 
@@ -402,6 +418,7 @@ function addProjectHandlers(projectIndex) {
 
   const deleteTaskFromDialogButton = document.querySelector(".task-card.dialog-card > div:nth-child(3) button:nth-child(3)");
   deleteTaskFromDialogButton.addEventListener("click", (event) => {
+    event.preventDefault();
     event.stopPropagation();
     deleteTaskFromDialogButton.closest("dialog").close();
 
